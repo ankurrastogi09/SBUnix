@@ -68,7 +68,6 @@ uint64_t getPhysicalAddress(uint64_t virtualAddress){
         uint64_t secondOffset = f2(virtualAddress);
         uint64_t thirdOffset = f3(virtualAddress);
         uint64_t fourthOffset = f4(virtualAddress);
-//	uint64_t fifthOffset = f5(virtualAddress);
 	uint64_t* plm = (uint64_t*) start_page_table;
 	uint64_t* pdp = (uint64_t*) *(plm + firstOffset);
 	//kprintf("plm: %p pdp: %p", (uint64_t) plm, (uint64_t) pdp);
@@ -76,8 +75,6 @@ uint64_t getPhysicalAddress(uint64_t virtualAddress){
 	uint64_t* pd = (uint64_t*) *(pdp + secondOffset);
 	uint64_t* pt = (uint64_t*) *(pd + thirdOffset);
 	return (uint64_t) pt;
-//	kprintf("physical address %p mapped at virtual address %p \n", *(pt + fourthOffset), virtualAddress);
-//	return (uint64_t) *(pt + fourthOffset);*/
 	return 0;
 }
 
@@ -88,7 +85,6 @@ void mapMemory(uint64_t  virtualAddress, uint64_t physAddress)
 	uint64_t secondOffset = f2(virtualAddress);
 	uint64_t thirdOffset = f3(virtualAddress);
 	uint64_t fourthOffset = f4(virtualAddress);
-//	uint64_t fifthOffset = f5(virtualAddress);
 	uint64_t* plm = (uint64_t*) get_free_page();
 	uint64_t* pdp = (uint64_t*) get_free_page();
 	uint64_t* pd = (uint64_t*) get_free_page();
