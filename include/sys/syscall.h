@@ -104,27 +104,6 @@ static inline uint64_t system_generic_7(uint64_t var0, uint64_t var1, uint64_t v
         return result;
 }
 
-// static inline void system_w(const char* str, size_t len){
-// 	__asm__ __volatile__ (
-// 		"movq $1, %%rax;"
-// 		"movq $1, %%rdi;"
-// 		"movq %0, %%rsi;"
-// 		"movq %1, %%rdx;"
-// 		"syscall"
-// 		:: "r" (str), "r" (len)
-// 		: "rax","rdi", "rsi", "rdx");
-// }
-
-// static inline void system_w_g(uint64_t str, uint64_t len){
-//         __asm__ __volatile__ (
-//                 "movq $1, %%rax;"
-//                 "movq $1, %%rdi;"
-//                 "movq %0, %%rsi;"
-//                 "movq %1, %%rdx;"
-//                 "syscall"
-//                 :: "r" (str), "r" (len)
-//                 : "rax","rdi", "rsi", "rdx");
-// }
 
 static inline void system_e(int status){
 	__asm__ __volatile__ (
