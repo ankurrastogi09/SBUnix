@@ -84,8 +84,6 @@ void loadProgramHeader(Elf64_Ehdr *hdr){
 	for(uint64_t i = 0; i < hdr->e_phnum; i++){
 		Elf64_Phdr *section = &phdr[i];
 		if(section->p_type == 1){}
-		//kprintf("p_type %p p_filesz %p p_memsz %p p_flags %p p_align %p \n", section->p_type, section->p_filesz, section->p_memsz, section->p_flags, section->p_align);
-		//kprintf("p_offset %p p_vaddr %p p_paddr %p \n", section->p_offset, section->p_vaddr, section->p_paddr);
 	}
 }
 
@@ -207,8 +205,6 @@ void setPcbVmaListFields(struct task_struct* pcb, Elf64_Ehdr *hdr, Elf64_Phdr *s
 	pcb->vma_list[count].size = (uint64_t) section->p_memsz;
 	pcb->vma_list[count].file_offset = (uint64_t) section->p_offset;
 	pcb->vma_list[count].file_start = (uint64_t) hdr;
-//        kprintf("p_type %p p_filesz %p p_memsz %p p_flags %p p_align %p \n", section->p_type, section->p_filesz, section->p_memsz, section->p_flags, section->p_align);
-//        kprintf("p_offset %p p_vaddr %p p_paddr %p \n", section->p_offset, section->p_vaddr, section->p_paddr);
 }
 
 void setStackInPcbVmaList(struct task_struct* pcb, int count){
@@ -221,7 +217,6 @@ void setStackInPcbVmaList(struct task_struct* pcb, int count){
 
 void populateVMAs(struct task_struct* pcb, Elf64_Ehdr* hdr, Elf64_Phdr* phdr){
 	int count = 0;
-        //kprintf("elf entry %p \n", hdr->e_entry);
         pcb->rip = (uint64_t) hdr->e_entry;
 	for(uint64_t i = 0; i < hdr->e_phnum; i++){
                 Elf64_Phdr *section = &phdr[i];
@@ -243,7 +238,6 @@ void loadFileFromTarfs(char* fileName, struct task_struct* pcb){
                 phu = (struct posix_header_ustar*) startAddress;
 
                 if(memcmp(phu->name, fileName, strlen(fileName)) == 0){
-                        //kprintf("file name is %s\n", phu->name);
 			Elf64_Ehdr* hdr = returnElfHdr(startAddress, phu->size, phu->typeflag);
 			Elf64_Phdr* phdr = getProgramHeader(hdr);
 			//populating VMAs for each program header
@@ -256,16 +250,12 @@ void loadFileFromTarfs(char* fileName, struct task_struct* pcb){
 }
 
 void traverseTarfs(){
-//	kprintf("tarfs in [%p:%p]\n", &_binary_tarfs_start, &_binary_tarfs_end);
 
 	uint64_t startAddress = (uint64_t) &_binary_tarfs_start;
 
 	struct posix_header_ustar* phu;
 
 	phu = (struct posix_header_ustar*) startAddress;
-
-	//kprintf("name %s size %s type %s \n", phu->name, phu->size, phu->typeflag);
-	kprintf("name %s \n", phu->name);
 
 	processELF(startAddress, phu->size, phu->typeflag);
 
