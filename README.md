@@ -3,7 +3,7 @@
 ### Author: Ankur Rastogi
 ### MS in CS, Stony Brook University, Fall 2018 Batch
 
-> :pray: Developed Operating System as a course project under Prof. Michael Ferdman with features like.
+Developed Operating System as a course project under Prof. Michael Ferdman with features like.
  
 - page tables, page descriptors, freelist, kmalloc
 - kernel threads, context switch, vma, switch to ring 3
