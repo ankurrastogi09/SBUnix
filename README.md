@@ -9,3 +9,5 @@ Developed Operating System as a course project under Prof. Michael Ferdman with 
 - kernel threads, context switch, vma, switch to ring 3
 - fault handler, syscalls, terminal, VFS, tarfs file system
 - fork with COW enabled, auto-growing stack, scheduler, sbush
+
+Start File: Main.c > https://github.com/ankurrastogi09/SBUnix/blob/master/sys/main.c
